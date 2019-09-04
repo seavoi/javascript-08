@@ -2,5 +2,7 @@ Treehouse JavaScript // Project 8: SQL Library Manager
 
 Sean Voigts
 
-Next step: Define models
-(https://teamtreehouse.com/library/using-sql-orms-with-nodejs/getting-started-with-sequelize/define-a-model)
+Next step: Request and Response Objects in Pug
+(https://teamtreehouse.com/library/the-request-object)
+
+You're killing it Sean
