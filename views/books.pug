@@ -2,3 +2,19 @@ extends layout.pug
 
 block content
 	
+	p
+		a(class='button' href='/books/new') Create New Book
+	table
+		thead
+			tr
+				th Title
+				th Author
+				th Genre
+				th Year
+		tbody
+			tr
+				td
+					a(href='book_detail.html') Title
+				td Author
+				td Genre
+				td Year

@@ -1,8 +1,7 @@
 Treehouse JavaScript // Project 8: SQL Library Manager
 
-Sean Voigts
+Sean Voigts 
 
-Next step: Request and Response Objects in Pug
-(https://teamtreehouse.com/library/the-request-object)
+(https://teamtreehouse.com/projects/sql-library-manager)
 
-You're killing it Sean
+Next step: Seperate routes individually (https://teamtreehouse.com/library/express-basics-2)

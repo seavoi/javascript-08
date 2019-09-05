@@ -1,0 +1,25 @@
+extends layout.pug
+
+block content
+
+	form(action='/books/new', method='post')
+		p
+			label Title
+				input(type='text', name='title', id='title', value="")
+		p
+			label Author
+				input(type='text', name='author', id='author', value="")
+		p
+			label Genre
+				input(type='text', name='genre', id='genre', value="")
+		p
+			label Year
+				input(type='text', name='year', id='year', value="")
+		p
+			button(type='submit') Update Book
+
+	form(action='/books/id/delete', method='post')
+		p
+			a(class='button' href='/books') Cancel
+		p 
+			input(type='submit', value="Delete Book")
