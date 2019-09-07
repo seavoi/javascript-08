@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Database
 const db = require('../db');
-const { Book } = db.models;
+const {Book} = db.models;
 
 // JSON Parser
 router.use(express.json());

@@ -1,7 +1,5 @@
 Treehouse JavaScript // Project 8: SQL Library Manager
 
-Sean Voigts 
+Sean Voigts (https://teamtreehouse.com/projects/sql-library-manager)
 
-(https://teamtreehouse.com/projects/sql-library-manager)
-
-Next step: Seperate routes individually (https://teamtreehouse.com/library/express-basics-2)
+Next step: Figure our errors - "TypeError: Cannot read property 'update' of null"
