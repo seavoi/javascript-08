@@ -28,11 +28,14 @@ router.get('/book/:id', (req, res) => {
 // Router (Post - Update)
 router.post('/book/:id/', async(req, res, next) => {
   try {
-    const bookTarget = await Book.findByPk(req.params.id)
-    await bookTarget.update(req.body)
-    .then(() => {
-      res.redirect('/books')
-    })
+    const targetedBook = await Book.findByPk(req.body.id)
+    await targetedBook.update({
+      title: req.body.title,
+      author: req.body.author,
+      genre: req.body.genre,
+      year: req.body.year
+    }, { fields: ['title', 'author', 'genre', 'year'] }); 
+    res.redirect('/books')
   } catch (error) {
     if(error.name === 'SequelizeValidationError'){
       const errors = error.errors
@@ -43,7 +46,7 @@ router.post('/book/:id/', async(req, res, next) => {
         genre: req.body.genre,
         year: req.body.year
       }
-      res.render('update-book', { book , errors})
+      res.render('book-detail', { book , errors})
     } else {
       console.error(error)
       error.status = 500;
@@ -56,8 +59,8 @@ router.post('/book/:id/', async(req, res, next) => {
 // Router (Post - Delete)
 router.post('/book/:id/delete', async(req, res, next) => {
 	try {
-		const deleteBook = await Book.findByPk(req.params.id);
-		await deleteBook.destroy();
+		const targetedBook = await Book.findByPk(req.body.id);
+		await targetedBook.destroy();
 		res.redirect('/books');
 	} catch (error){
 		console.error('Fiddle sticks! We encountered an error while we attemped to remove that book to the database.', error);
