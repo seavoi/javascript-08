@@ -12,23 +12,31 @@ module.exports = (sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-      	notEmpty: true,
+        notNull: {
+          msg: 'Yikes. We require a title for this book.'
+        },
+        notEmpty: {
+          msg: 'Yikes. We require a title for this book.'
+        }
       },
     },
     author: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-      	notEmpty: true,
+        notNull: {
+          msg: 'Jinkies. We require an author for this book.'
+        },
+        notEmpty: {
+          msg: 'Jinkies. We require an author for this book.'
+        }
       },
     },
     genre: {
       type: Sequelize.STRING,
-      allowNull: false,
     },
     year: {
       type: Sequelize.INTEGER,
-      allowNull: false,
     },
 	}, { sequelize });
 

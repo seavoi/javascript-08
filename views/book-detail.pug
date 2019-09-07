@@ -1,25 +1,25 @@
 extends layout.pug
 
 block content
-
-	form(action='/books/new', method='post')
+	include error-form
+	form(action='/book/${book.id}' method='post')
 		p
 			label Title
-				input(type='text', name='title', id='title', value="")
+				input(type='text', name='title', id='title', value=book.title)
 		p
 			label Author
-				input(type='text', name='author', id='author', value="")
+				input(type='text', name='author', id='author', value=book.author)
 		p
 			label Genre
-				input(type='text', name='genre', id='genre', value="")
+				input(type='text', name='genre', id='genre', value=book.genre)
 		p
 			label Year
-				input(type='text', name='year', id='year', value="")
+				input(type='text', name='year', id='year', value=book.year)
 		p
-			button(type='submit') Update Book
+			input(type="submit", value="Update Book")
+		p
+			a(class='button' href='/') Cancel
 
-	form(action='/books/id/delete', method='post')
-		p
-			a(class='button' href='/books') Cancel
+	form(action='/book/${book.id}/delete', method='post')
 		p 
-			input(type='submit', value="Delete Book")
+			input(type='submit', value='Delete Book')
