@@ -36,7 +36,15 @@ router.post('/books/new', (req, res) => {
 		  	const book = await Book.create({ id, title, author, genre, year })
 		 		res.redirect(`/book/${book.dataValues.id}`);
 		  } catch (error) {
-		    console.error('Oopsies! We encountered an error while we attemped to add that book to the database.', error);
+		    if(error.name === 'SequelizeValidationError'){
+          const errors = error.errors
+          res.render('new-book', {errors})
+        } else {
+          console.error(error)
+          error.status = 500;
+          error.message = "Book could not bed added to the library database"
+          next(error);
+        }
 		  }
 	})();
 

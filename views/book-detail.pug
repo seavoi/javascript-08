@@ -1,7 +1,7 @@
 extends layout.pug
 
 block content
-	include error-form
+	include form-error
 	form(action=`/book/${book.id}` method='post')
 		p
 			label Title
