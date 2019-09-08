@@ -25,43 +25,28 @@ router.get('/book/:id', (req, res) => {
   })();
 });
 
-// Router (Post - Update)
+// Router (Update)
 router.post('/book/:id/', async(req, res, next) => {
   try {
-    const targetedBook = await Book.findByPk(req.body.id)
-    await targetedBook.update({
-      title: req.body.title,
-      author: req.body.author,
-      genre: req.body.genre,
-      year: req.body.year
-    }, { fields: ['title', 'author', 'genre', 'year'] }); 
-    res.redirect('/books')
-  } catch (error) {
-    if(error.name === 'SequelizeValidationError'){
-      const errors = error.errors
-      const book = {
-        id: req.body.id,
-        title: req.body.title,
-        author: req.body.author,
-        genre: req.body.genre,
-        year: req.body.year
-      }
-      res.render('book-detail', { book , errors})
-    } else {
-      console.error(error)
-      error.status = 500;
-      error.message = "Oopsies! We encountered an error while we attemped to add that book to the database."
-      next(error);
-    }
+    const targetedBook = await Book.findByPk(req.params.id)
+    await targetedBook.update(req.body)
+    .then(() => {
+      res.redirect('/books');
+    })
+  } catch(err) {
+    console.log(err)
+    res.render('error')
   }
 });
 
-// Router (Post - Delete)
+// Router (Delete)
 router.post('/book/:id/delete', async(req, res, next) => {
 	try {
-		const targetedBook = await Book.findByPk(req.body.id);
-		await targetedBook.destroy();
-		res.redirect('/books');
+		const targetedBook = await Book.findByPk(req.params.id)
+		await targetedBook.destroy(req.body)
+		.then(() => {
+      res.redirect('/books');
+    })
 	} catch (error){
 		console.error('Fiddle sticks! We encountered an error while we attemped to remove that book to the database.', error);
 	}

@@ -2,7 +2,7 @@ extends layout.pug
 
 block content
 	include error-form
-	form(action='/book/${book.id}' method='post')
+	form(action=`/book/${book.id}` method='post')
 		p
 			label Title
 				input(type='text', name='title', id='title', value=book.title)
@@ -20,6 +20,6 @@ block content
 		p
 			a(class='button' href='/') Cancel
 
-	form(action='/book/${book.id}/delete', method='post')
+	form(action=`/book/${book.id}/delete`, method='post')
 		p 
 			input(type='submit', value='Delete Book')
