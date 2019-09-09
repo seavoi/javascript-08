@@ -27,15 +27,30 @@ router.get('/book/:id', (req, res) => {
 
 // Router (Update)
 router.post('/book/:id/', async(req, res, next) => {
+
+  // Book Variables
+  const id = req.params.id;
+  const title = req.body.title;
+  const author = req.body.author;
+  const genre = req.body.genre;
+  const year = req.body.year;
+  
   try {
     const targetedBook = await Book.findByPk(req.params.id)
     await targetedBook.update(req.body)
     .then(() => {
       res.redirect('/books');
-    })
-  } catch(err) {
-    console.log(err)
-    res.render('error')
+  })
+  } catch (error) {
+    if(error.name === 'SequelizeValidationError'){
+      const errors = error.errors
+      res.render('book-detail', {errors})
+    } else {
+      console.error(error)
+      error.status = 500;
+      error.message = "Yikes. We couldn't make that update."
+      next(error);
+    }
   }
 });
 
@@ -50,7 +65,7 @@ router.post('/book/:id/delete', async(req, res, next) => {
 	} catch (error){
 		console.error('Fiddle sticks! We encountered an error while we attemped to remove that book to the database.', error);
 	}
-})
+});
 
 // Export
 module.exports = router
