@@ -34,7 +34,7 @@ router.post('/book/:id/', async(req, res, next) => {
   const author = req.body.author;
   const genre = req.body.genre;
   const year = req.body.year;
-  
+
   try {
     const targetedBook = await Book.findByPk(req.params.id)
     await targetedBook.update(req.body)
@@ -43,8 +43,13 @@ router.post('/book/:id/', async(req, res, next) => {
   })
   } catch (error) {
     if(error.name === 'SequelizeValidationError'){
+      const book = req.body;
+      book.id = req.params.id
+      res.locals.pageTitle = "Uh oh!";
+      res.locals.pageHeadline = "Uh oh!";
       const errors = error.errors
-      res.render('book-detail', {errors})
+      res.render('book-detail', { errors, book });
+      //res.redirect('/book/' + book.id, {errors, book})
     } else {
       console.error(error)
       error.status = 500;
